@@ -3,19 +3,24 @@ package com.yesh.hotelorder.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.firebase.ui.auth.IdpResponse;
 import com.yesh.hotelorder.R;
+
+import java.io.File;
+import java.util.ArrayList;
 
 import static com.firebase.ui.auth.ui.ExtraConstants.EXTRA_IDP_RESPONSE;
 
@@ -197,15 +202,76 @@ public class HomeScreen extends AppCompatActivity implements ActionBar.TabListen
     public static class DummySectionFragment extends Fragment {
 
         public static final String ARG_SECTION_NUMBER = "section_number";
+        private final String image_titles[] = {
+                "Img1",
+                "Img2",
+                "Img3",
+                "Img4",
+                "Img5",
+                "Img6",
+                "Img7",
+                "Img8",
+                "Img9",
+                "Img10",
+                "Img11",
+                "Img12",
+                "Img13",
+        };
+
+        private final Integer image_ids[] = {
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+                R.drawable.com_facebook_button_icon_blue,
+        };
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_section_dummy, container, false);
-            Bundle args = getArguments();
-            ((TextView) rootView.findViewById(android.R.id.text1)).setText(
-                    getString(R.string.dummy_section_text, args.getInt(ARG_SECTION_NUMBER)));
+            RecyclerView recyclerView = rootView.findViewById(R.id.imageGallery);
+            recyclerView.setHasFixedSize(true);
+
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+            recyclerView.setLayoutManager(layoutManager);
+            ArrayList<CreateList> createLists = prepareData();
+            MyAdapter adapter = new MyAdapter(getContext(), createLists);
+            recyclerView.setAdapter(adapter);
             return rootView;
+        }
+
+//        private ArrayList<CreateList> prepareData() {
+//            ArrayList<CreateList> theimage = new ArrayList<>();
+//            String path = Environment.getRootDirectory().toString();
+//            File f = new File(path);
+//            File file[] = f.listFiles();
+//            for (int i=0; i < file.length; i++)
+//            {
+//                CreateList createList = new CreateList();
+//                createList.setImage_Location(file[i].getName());
+//                theimage.add(createList);
+//            }
+//            return theimage;
+//        }
+
+        private ArrayList<CreateList> prepareData() {
+            ArrayList<CreateList> theimage = new ArrayList<>();
+            for (int i = 0; i < image_titles.length; i++) {
+                CreateList createList = new CreateList();
+                createList.setImage_title(image_titles[i]);
+                createList.setImage_ID(image_ids[i]);
+                theimage.add(createList);
+            }
+            return theimage;
         }
     }
 }

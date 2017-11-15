@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Firebase UI</string>
+    <string name="app_name">Hotel Order</string>
 
     <!-- Chooser -->
     <string name="title_auth_activity">Auth UI demo</string>
