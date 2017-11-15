@@ -16,6 +16,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.yesh.hotelorder.R;
 import com.yesh.hotelorder.database.realtime.RealtimeDbChatActivity;
+import com.yesh.hotelorder.home.HomeScreen;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -113,7 +114,7 @@ public class AuthUiActivity extends AppCompatActivity {
 //    }
 
     private void startSignedInActivity(IdpResponse response) {
-        startActivity(RealtimeDbChatActivity.createIntent(this, response));
+        startActivity(HomeScreen.createIntent(this, response));
     }
 
     @MainThread

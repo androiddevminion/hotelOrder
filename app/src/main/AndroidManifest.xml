@@ -41,6 +41,10 @@
             android:name=".database.realtime.RealtimeDbChatIndexActivity"
             android:label="@string/title_realtime_database_activity" />
 
+        <activity
+            android:name=".home.HomeScreen"
+            android:label="@string/title_home_screen_activity" />
+
         <!-- Storage UI demo -->
         <activity
             android:name=".storage.ImageActivity"
